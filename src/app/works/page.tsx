@@ -18,11 +18,10 @@ export default async function WorksPage() {
 
   return (
     <div className="mx-auto w-full max-w-[1680px] overflow-hidden bg-ink">
-      <Header content={content.header} variant="works" />
-      <WorksIndex projects={projects} />
-      <ContactFooter content={content.contact} />
-     <ContactFooter content={content.contact} />
-      <BackToTop />
+   <Header content={content.header} variant="works" />
+<WorksIndex projects={projects} />
+<ContactFooter content={content.contact} />
+<BackToTop />
     </div>
   );
 }
