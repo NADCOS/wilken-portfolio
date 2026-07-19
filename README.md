@@ -10,4 +10,10 @@ Replace these files (all complete, drop-in):
 - `src/components/portfolio/CompareSlider.tsx` — uses real clay render when set, falls back to grayscale filter otherwise
 - `src/components/portfolio/CaseStudy.tsx` — passes `claySrc` to the slider
 
+Interactive hero + frame scrub (new):
+- `ReactiveName.tsx` — new; hero name letters lift/skew toward the cursor
+- `ScrubImage.tsx` — new; work-card images scrub through 8 lighting frames on hover
+- `Hero.tsx` — replaced; uses ReactiveName for the name block (nothing else changed)
+- `SelectedWorks.tsx` — replaced; WorkTile uses ScrubImage (keeps CursorZone wiring)
+
 No other changes needed. After deploy: Admin → edit your case-study project → upload the clay render in the new slot → Save.

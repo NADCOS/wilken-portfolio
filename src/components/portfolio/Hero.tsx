@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { SiteContent } from "@/lib/content";
+import { ReactiveName } from "./ReactiveName";
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 28 },
@@ -52,14 +53,10 @@ export function Hero({ content }: { content: SiteContent["hero"] }) {
         <div className="flex flex-1 basis-[440px] flex-col justify-between pb-[clamp(24px,4vw,48px)]">
           <motion.div {...fadeUp(0.24)}>
             <div className="flex flex-wrap items-center gap-[clamp(16px,3vw,28px)]">
-              <div>
-                <div className="font-display text-[clamp(48px,8vw,72px)] leading-none text-paper uppercase">
-                  {content.firstName}
-                </div>
-                <div className="font-display text-[clamp(48px,8vw,72px)] leading-none text-accent uppercase">
-                  {content.lastName}
-                </div>
-              </div>
+              <ReactiveName
+                firstName={content.firstName}
+                lastName={content.lastName}
+              />
               <motion.div
                 className="relative aspect-square w-[clamp(92px,14vw,120px)] shrink-0"
                 animate={{ rotate: 360 }}
