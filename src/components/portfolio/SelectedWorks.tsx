@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { WorkCard } from "@/lib/supabase/types";
 import { WORK_TYPE_LABELS } from "@/lib/supabase/types";
+import { CursorZone } from "./CursorZone";
 
 export function WorkTile({ project }: { project: WorkCard }) {
   return (
@@ -53,7 +54,7 @@ export function SelectedWorks({ projects }: { projects: WorkCard[] }) {
         </h2>
         <div className="flex flex-col items-end gap-[14px]">
           <div className="max-w-[260px] text-right text-[13px] tracking-[0.24em] text-gray2 uppercase">
-            3D renders, websites & brands — 2016–2026
+            3D renders, websites &amp; brands — 2016–2026
           </div>
           <Link
             href="/works"
@@ -63,11 +64,11 @@ export function SelectedWorks({ projects }: { projects: WorkCard[] }) {
           </Link>
         </div>
       </div>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-6">
+      <CursorZone className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-6">
         {projects.map((project) => (
           <WorkTile key={project.id} project={project} />
         ))}
-      </div>
+      </CursorZone>
       <Link
         href="/works"
         className="mt-6 flex items-center justify-center gap-[14px] border-2 border-line p-[18px] text-[13px] font-bold tracking-[0.3em] uppercase hover:border-accent hover:bg-accent hover:text-ink"

@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { WorkCard } from "@/lib/projects";
 import type { SiteContent } from "@/lib/content";
+import { CompareSlider } from "./CompareSlider";
 
 export function CaseStudy({
   project,
@@ -24,15 +24,9 @@ export function CaseStudy({
         <div className="font-display text-[30px] text-ink">↗︎</div>
       </div>
       <div className="flex flex-wrap">
-        <div className="flex-1 basis-[320px] border-b-2 border-ink">
+        <div className="relative flex-1 basis-[320px] border-b-2 border-ink">
           {project.image && (
-            <Image
-              src={project.image}
-              alt={project.title + " case study"}
-              width={640}
-              height={640}
-              className="block h-full min-h-[280px] w-full object-cover"
-            />
+            <CompareSlider src={project.image} alt={project.title + " case study"} />
           )}
         </div>
         <div className="flex grow-[2] basis-[420px] flex-col gap-8 border-b-2 border-ink px-[clamp(20px,4vw,40px)] py-[clamp(28px,4vw,44px)]">
