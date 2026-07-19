@@ -14,7 +14,7 @@ export function Hero({ content }: { content: SiteContent["hero"] }) {
   return (
     <section className="px-[clamp(20px,4vw,48px)] pt-[clamp(28px,5vw,56px)]">
       <motion.div className="flex items-center gap-[14px]" {...fadeUp(0)}>
-        <div className="font-display text-[26px] leading-none text-accent">✳</div>
+        <div className="font-display text-[26px] leading-none text-accent">✳︎</div>
         <div className="text-[14px] font-semibold tracking-[0.3em] uppercase">
           {content.kicker}
         </div>
@@ -109,7 +109,7 @@ export function Hero({ content }: { content: SiteContent["hero"] }) {
               </motion.div>
             </div>
             <div className="mt-[22px] inline-flex items-center gap-3 bg-accent px-[18px] py-[10px] text-[clamp(12px,1.6vw,14px)] font-bold tracking-[0.18em] text-ink uppercase">
-              ↗ {content.roleChip}
+              ↗︎ {content.roleChip}
             </div>
           </motion.div>
 

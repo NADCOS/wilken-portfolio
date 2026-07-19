@@ -42,7 +42,7 @@ export function Header({
               Skills
             </a>
             <a href="#contact" className={CONTACT_CELL}>
-              Contact <span className="font-display text-[16px]">↗</span>
+              Contact <span className="font-display text-[16px]">↗︎</span>
             </a>
           </>
         ) : (
@@ -51,7 +51,7 @@ export function Header({
               <span className="mr-[10px] font-display text-[16px]">←</span> Home
             </Link>
             <a href="#contact" className={CONTACT_CELL}>
-              Contact <span className="font-display text-[16px]">↗</span>
+              Contact <span className="font-display text-[16px]">↗︎</span>
             </a>
           </>
         )}

@@ -18,13 +18,13 @@ export function ContactFooter({ content }: { content: SiteContent["contact"] }) 
               <br />
               <span className="text-paper">{content.headingLine3}</span>
             </h2>
-            <div className="font-display text-[44px] text-ink">↗</div>
+            <div className="font-display text-[44px] text-ink">↗︎</div>
           </div>
           <div className="flex items-end gap-4">
             <div className="h-[72px] w-[72px] rounded-full bg-ink" />
             <div className="h-9 w-[72px] rounded-t-[36px] bg-ink opacity-55" />
             <div className="h-9 w-9 bg-ink" />
-            <div className="ml-auto font-display text-[32px] text-ink">✳</div>
+            <div className="ml-auto font-display text-[32px] text-ink">✳︎</div>
           </div>
         </div>
         <div className="flex flex-col justify-center gap-[22px] px-[clamp(20px,4vw,48px)] py-[clamp(32px,5vw,56px)]">

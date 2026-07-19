@@ -21,7 +21,7 @@ export function CaseStudy({
         <div className="font-display text-[clamp(26px,4vw,42px)] leading-none text-ink uppercase">
           Case Study
         </div>
-        <div className="font-display text-[30px] text-ink">↗</div>
+        <div className="font-display text-[30px] text-ink">↗︎</div>
       </div>
       <div className="flex flex-wrap">
         <div className="flex-1 basis-[320px] border-b-2 border-ink">

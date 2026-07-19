@@ -49,7 +49,7 @@ export function SelectedWorks({ projects }: { projects: WorkCard[] }) {
         <h2 className="m-0 font-display text-[clamp(48px,8vw,88px)] leading-[0.95] text-paper uppercase">
           Selected
           <br />
-          <span className="text-accent">Works ↗</span>
+          <span className="text-accent">Works ↗︎</span>
         </h2>
         <div className="flex flex-col items-end gap-[14px]">
           <div className="max-w-[260px] text-right text-[13px] tracking-[0.24em] text-gray2 uppercase">

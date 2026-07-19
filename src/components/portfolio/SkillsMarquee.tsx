@@ -1,5 +1,5 @@
 export function SkillsMarquee({ items }: { items: string[] }) {
-  const text = items.join(" ✳ ") + " ✳";
+  const text = items.join(" ✳︎ ") + " ✳︎";
   return (
     <div
       id="skills"

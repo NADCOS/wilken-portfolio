@@ -73,7 +73,7 @@ export function LoginForm() {
         disabled={loading}
         className="mt-2 cursor-pointer border-none bg-accent p-4 font-display text-[18px] tracking-[0.14em] text-ink uppercase hover:bg-paper disabled:opacity-60"
       >
-        {loading ? "Signing In…" : "Sign In ↗"}
+        {loading ? "Signing In…" : "Sign In ↗︎"}
       </button>
       <div className="text-center text-[12px] tracking-[0.18em] text-gray2 uppercase">
         Protected by Supabase Auth

@@ -6,7 +6,7 @@ export function SkillsGrid({ content }: { content: SiteContent["skills"] }) {
       <h2 className="m-0 basis-[380px] font-display text-[clamp(48px,8vw,76px)] leading-[0.95] text-paper uppercase">
         Skills
         <br />
-        I Use <span className="text-accent">✳</span>
+        I Use <span className="text-accent">✳︎</span>
       </h2>
       <div className="flex flex-1 basis-[400px] flex-wrap content-center gap-4">
         {content.chips.map((skill) => (
