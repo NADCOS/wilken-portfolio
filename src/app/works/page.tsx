@@ -4,6 +4,7 @@ import { WorksIndex } from "@/components/portfolio/WorksIndex";
 import { ContactFooter } from "@/components/portfolio/ContactFooter";
 import { getPublishedProjects } from "@/lib/projects";
 import { getSiteContent } from "@/lib/content";
+import { BackToTop } from "@/components/portfolio/BackToTop";
 
 export const metadata: Metadata = {
   title: "All Works — Wilken Eupalao",

@@ -7,6 +7,7 @@ import { CaseStudy } from "@/components/portfolio/CaseStudy";
 import { ContactFooter } from "@/components/portfolio/ContactFooter";
 import { getFeaturedProjects, getCaseStudyProject } from "@/lib/projects";
 import { getSiteContent } from "@/lib/content";
+import { BackToTop } from "@/components/portfolio/BackToTop";
 
 export default async function Home() {
   const [projects, caseStudy, content] = await Promise.all([

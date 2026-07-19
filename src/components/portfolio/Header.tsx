@@ -15,7 +15,7 @@ export function Header({
   variant?: "home" | "works";
 }) {
   return (
-    <header className="flex flex-wrap items-stretch border-b-2 border-line">
+    <header className="sticky top-0 z-40 flex flex-wrap items-stretch border-b-2 border-line bg-ink">
       <div className="flex flex-1 basis-[320px] flex-wrap items-center gap-[14px] px-[clamp(20px,4vw,48px)] py-4">
         <Image
           src="/images/wilken-logo.jpg"
