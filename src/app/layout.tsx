@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Anton, Oswald } from "next/font/google";
 import "./globals.css";
+import { LoadingScreen } from "@/components/portfolio/LoadingScreen";
 
 const anton = Anton({
   variable: "--font-anton",
@@ -27,7 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${anton.variable} ${oswald.variable}`}>
-      <body>{children}</body>
+      <body>
+        <LoadingScreen />
+        {children}
+      </body>
     </html>
   );
 }
