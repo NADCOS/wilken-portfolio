@@ -16,7 +16,16 @@ Interactive hero + frame scrub (new):
 - `Hero.tsx` — replaced; uses ReactiveName for the name block (nothing else changed)
 - `SelectedWorks.tsx` — replaced; WorkTile uses ScrubImage (keeps CursorZone wiring)
 
-Latest (logo SVG + contact upgrades):
+Latest (Animation work type + video upload):
+- `types.ts` — adds "animation" WorkType + `video` on WorkCard
+- `projects.ts` — maps video from tags (`video:<path>`, same trick as clay — still no SQL needed)
+- `Dashboard.tsx` + `EditDrawer.tsx` — "Animation" type button + video upload slot (mp4/webm, goes to the same project-images bucket) + remove button
+- `HoverVideo.tsx` — new; card video: poster still, plays muted on hover, ▶ badge
+- `SelectedWorks.tsx` — WorkTile prefers video > image > placeholder
+- `WorksIndex.tsx` — adds Animation filter on /works
+Upload BOTH a video and an image per animation project — the image is the poster/thumbnail. Keep videos short (<20MB) for fast cards.
+
+Previous (logo SVG + contact upgrades):
 - `public/images/logo.svg` — new; your logo paths recolored to #C95B46 on transparent (the uploaded SVG had its colors stripped)
 - `public/wilken.vcf` — new; downloadable contact card
 - `Header.tsx` + `admin/Sidebar.tsx` — replaced; use logo.svg (plain <img>, next/image blocks SVG). Delete public/images/wilken-logo.jpg after.

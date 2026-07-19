@@ -3,12 +3,15 @@ import type { WorkCard } from "@/lib/supabase/types";
 import { WORK_TYPE_LABELS } from "@/lib/supabase/types";
 import { CursorZone } from "./CursorZone";
 import { ScrubImage } from "./ScrubImage";
+import { HoverVideo } from "./HoverVideo";
 
 export function WorkTile({ project }: { project: WorkCard }) {
   return (
     <div className="group flex flex-col border-2 border-line hover:border-accent">
       <div className="relative aspect-[4/3] overflow-hidden">
-        {project.image ? (
+        {project.video ? (
+          <HoverVideo src={project.video} poster={project.image} />
+        ) : project.image ? (
           <ScrubImage src={project.image} alt={project.title} />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-surface-2 text-[11px] tracking-[0.2em] text-gray2 uppercase">

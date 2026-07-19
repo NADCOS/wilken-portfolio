@@ -21,6 +21,7 @@ const EMPTY_FORM: DrawerForm = {
   published: false,
   image_path: "",
   clay_image_path: "",
+  video_path: "",
 };
 
 export function Dashboard({
@@ -36,6 +37,7 @@ export function Dashboard({
   const [form, setForm] = useState<DrawerForm>(EMPTY_FORM);
   const [uploading, setUploading] = useState(false);
   const [uploadingClay, setUploadingClay] = useState(false);
+  const [uploadingVideo, setUploadingVideo] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const isNew = editing === "new";
@@ -59,6 +61,8 @@ export function Dashboard({
       image_path: project.image_path ?? "",
       clay_image_path:
         project.tags?.find((t) => t.startsWith("clay:"))?.slice(5) ?? "",
+      video_path:
+        project.tags?.find((t) => t.startsWith("video:"))?.slice(6) ?? "",
     });
     setEditing(project);
   }
@@ -68,7 +72,7 @@ export function Dashboard({
   }
 
   async function uploadTo(
-    key: "image_path" | "clay_image_path",
+    key: "image_path" | "clay_image_path" | "video_path",
     file: File,
     setBusy: (b: boolean) => void,
   ) {
@@ -101,7 +105,12 @@ export function Dashboard({
       is_case_study: form.is_case_study,
       published: form.published,
       image_path: form.image_path || null,
-      tags: form.clay_image_path ? ["clay:" + form.clay_image_path] : null,
+      tags: (() => {
+        const tags: string[] = [];
+        if (form.clay_image_path) tags.push("clay:" + form.clay_image_path);
+        if (form.video_path) tags.push("video:" + form.video_path);
+        return tags.length ? tags : null;
+      })(),
     };
 
     if (isNew) {
@@ -201,8 +210,12 @@ export function Dashboard({
               onUploadClayFile={(file) =>
                 uploadTo("clay_image_path", file, setUploadingClay)
               }
+              onUploadVideoFile={(file) =>
+                uploadTo("video_path", file, setUploadingVideo)
+              }
               uploading={uploading}
               uploadingClay={uploadingClay}
+              uploadingVideo={uploadingVideo}
               saving={saving}
               imagePreviewUrl={
                 form.image_path ? projectImageUrl(form.image_path) : null

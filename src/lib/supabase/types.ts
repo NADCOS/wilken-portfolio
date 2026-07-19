@@ -1,9 +1,10 @@
-export type WorkType = "3d" | "web" | "brand";
+export type WorkType = "3d" | "web" | "brand" | "animation";
 
 export const WORK_TYPE_LABELS: Record<WorkType, string> = {
   "3d": "3D Render",
   web: "Website",
   brand: "Branding",
+  animation: "Animation",
 };
 
 // Card shape used by the public pages (client-safe, no server imports).
@@ -13,6 +14,7 @@ export type WorkCard = {
   category: string | null;
   image: string | null;
   clayImage: string | null;
+  video: string | null;
   workType: WorkType;
   featured: boolean;
   isCaseStudy: boolean;

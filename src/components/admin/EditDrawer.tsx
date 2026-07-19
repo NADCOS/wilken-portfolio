@@ -14,12 +14,14 @@ export type DrawerForm = {
   published: boolean;
   image_path: string;
   clay_image_path: string;
+  video_path: string;
 };
 
 const WORK_TYPES: { key: WorkType; label: string }[] = [
   { key: "3d", label: "3D Render" },
   { key: "web", label: "Website" },
   { key: "brand", label: "Branding" },
+  { key: "animation", label: "Animation" },
 ];
 
 type Props = {
@@ -30,8 +32,10 @@ type Props = {
   onSave: () => void;
   onUploadFile: (file: File) => void;
   onUploadClayFile: (file: File) => void;
+  onUploadVideoFile: (file: File) => void;
   uploading: boolean;
   uploadingClay: boolean;
+  uploadingVideo: boolean;
   imagePreviewUrl: string | null;
   clayPreviewUrl: string | null;
   saving: boolean;
@@ -73,14 +77,17 @@ export function EditDrawer({
   onSave,
   onUploadFile,
   onUploadClayFile,
+  onUploadVideoFile,
   uploading,
   uploadingClay,
+  uploadingVideo,
   imagePreviewUrl,
   clayPreviewUrl,
   saving,
 }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const clayInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
 
   function field<K extends keyof DrawerForm>(key: K) {
     return (value: DrawerForm[K]) => onChange({ ...form, [key]: value });
@@ -171,6 +178,42 @@ export function EditDrawer({
             className="cursor-pointer self-start border-none bg-transparent p-0 text-[11px] tracking-[0.2em] text-gray2 uppercase hover:text-accent"
           >
             ✕ Remove clay render
+          </button>
+        )}
+      </div>
+
+      <input
+        ref={videoInputRef}
+        type="file"
+        accept="video/mp4,video/webm"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) onUploadVideoFile(file);
+        }}
+      />
+      <div className="flex flex-col gap-[6px]">
+        <span className="text-[11px] font-bold tracking-[0.24em] text-gray2 uppercase">
+          Video · shown on the work card (mp4/webm)
+        </span>
+        <div
+          onClick={() => videoInputRef.current?.click()}
+          className="flex h-[72px] shrink-0 cursor-pointer flex-col items-center justify-center gap-1 border-2 border-dashed border-line-dashed bg-ink hover:border-accent"
+        >
+          <div className="text-[12px] tracking-[0.22em] text-gray2 uppercase">
+            {uploadingVideo
+              ? "Uploading…"
+              : form.video_path
+                ? "✓ " + form.video_path.split("-").slice(1).join("-")
+                : "▶ Upload video"}
+          </div>
+        </div>
+        {form.video_path && (
+          <button
+            onClick={() => field("video_path")("")}
+            className="cursor-pointer self-start border-none bg-transparent p-0 text-[11px] tracking-[0.2em] text-gray2 uppercase hover:text-accent"
+          >
+            ✕ Remove video
           </button>
         )}
       </div>

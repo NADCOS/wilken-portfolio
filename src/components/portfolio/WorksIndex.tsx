@@ -7,6 +7,7 @@ import { WorkTile } from "@/components/portfolio/SelectedWorks";
 const FILTERS: { key: WorkType | "all"; label: string }[] = [
   { key: "all", label: "All" },
   { key: "3d", label: "3D Render" },
+  { key: "animation", label: "Animation" },
   { key: "web", label: "Website Design" },
   { key: "brand", label: "Branding" },
 ];
@@ -31,7 +32,7 @@ export function WorksIndex({ projects }: { projects: WorkCard[] }) {
           All Works <span className="text-accent">↗︎</span>
         </h1>
         <div className="pb-[14px] text-[13px] tracking-[0.24em] text-gray2 uppercase">
-          {count} Projects · 3D · Web · Brand
+          {count} Projects · 3D · Motion · Web · Brand
         </div>
       </div>
 
