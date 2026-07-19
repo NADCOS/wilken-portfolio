@@ -16,4 +16,14 @@ Interactive hero + frame scrub (new):
 - `Hero.tsx` — replaced; uses ReactiveName for the name block (nothing else changed)
 - `SelectedWorks.tsx` — replaced; WorkTile uses ScrubImage (keeps CursorZone wiring)
 
+Portrait + cursor + skills upgrades (new):
+- `public/images/portrait.jpeg` — replaced; background tone-mapped to exact #151515 (your rust outline preserved)
+- `Hero.tsx` — replaced; drops the grayscale/blend/glitch layers that were killing the outline color
+- `CustomCursor.tsx` — new; site-wide ✳ cursor, grows over links/buttons (desktop only, native cursor on touch)
+- `src/app/globals.css` — replaced; cursor:none rules (scoped, desktop only)
+- `SkillsGrid.tsx` — replaced; monogram badge pops over each skill chip on hover + animated "Projects Completed" counter (count-up on scroll)
+- `src/app/page.tsx` — replaced; mounts CustomCursor, passes PROJECTS_DONE (edit the constant at the top, currently 120)
+
+Add `<CustomCursor />` inside the works page wrapper too if you want the cursor on /works (same one-line import as page.tsx). While you're in `src/app/works/page.tsx`, delete the duplicated `<ContactFooter />` line.
+
 No other changes needed. After deploy: Admin → edit your case-study project → upload the clay render in the new slot → Save.

@@ -162,15 +162,7 @@ export function Hero({ content }: { content: SiteContent["hero"] }) {
               alt="Wilken Eupalao portrait"
               width={520}
               height={640}
-              className="block w-full grayscale mix-blend-multiply contrast-[1.06]"
-            />
-            <Image
-              src="/images/portrait.jpeg"
-              alt=""
-              aria-hidden
-              width={520}
-              height={640}
-              className="face-glitch absolute inset-0 block w-full mix-blend-multiply"
+              className="block w-full"
             />
           </div>
           <div className="absolute right-[-14px] bottom-[110px] -rotate-90 origin-[right_bottom] font-display text-[22px] tracking-[0.08em] text-ink uppercase">

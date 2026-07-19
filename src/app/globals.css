@@ -73,3 +73,14 @@ input,
 textarea {
   font-family: var(--font-sans);
 }
+
+/* Custom cursor: native cursor hidden only when the follower is mounted (desktop pointers) */
+@media (pointer: fine) {
+  .has-custom-cursor,
+  .has-custom-cursor a,
+  .has-custom-cursor button,
+  .has-custom-cursor input,
+  .has-custom-cursor textarea {
+    cursor: none;
+  }
+}
