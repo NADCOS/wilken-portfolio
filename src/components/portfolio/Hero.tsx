@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import type { SiteContent } from "@/lib/content";
 
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 28 },
@@ -9,35 +10,32 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.7, delay, ease: "easeOut" as const },
 });
 
-export function Hero() {
+export function Hero({ content }: { content: SiteContent["hero"] }) {
   return (
-    <section className="px-12 pt-14">
+    <section className="px-[clamp(20px,4vw,48px)] pt-[clamp(28px,5vw,56px)]">
       <motion.div className="flex items-center gap-[14px]" {...fadeUp(0)}>
-        <div className="font-display text-[26px] leading-none text-accent">
-          ✳
-        </div>
+        <div className="font-display text-[26px] leading-none text-accent">✳</div>
         <div className="text-[14px] font-semibold tracking-[0.3em] uppercase">
-          3D Designer — Portfolio 2026
+          {content.kicker}
         </div>
       </motion.div>
 
-      <div className="mt-2 grid grid-cols-[1fr_240px] items-end gap-8">
+      <div className="mt-2 flex flex-wrap items-end gap-x-8 gap-y-6">
         <motion.h1
-          className="m-0 font-display text-[196px] leading-[0.92] tracking-[-0.01em] text-paper uppercase"
+          className="m-0 flex-1 basis-[460px] font-display text-[clamp(64px,13.5vw,196px)] leading-[0.92] tracking-[-0.01em] text-paper uppercase"
           {...fadeUp(0.08)}
         >
-          Portfolio
+          {content.titleWord}
         </motion.h1>
         <motion.div
-          className="flex flex-col gap-5 pb-[18px]"
+          className="flex max-w-[280px] flex-1 basis-[200px] flex-col gap-5 pb-[18px]"
           {...fadeUp(0.16)}
         >
           <p
             className="m-0 text-[13px] leading-[1.7] tracking-[0.18em] text-gray2 uppercase"
             style={{ textWrap: "pretty" }}
           >
-            I build photoreal spaces and bold web experiences that are
-            impossible to ignore.
+            {content.blurb}
           </p>
           <div
             className="h-11"
@@ -49,27 +47,23 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <div className="mt-10 grid grid-cols-[1fr_520px] gap-12">
+      <div className="mt-10 flex flex-wrap gap-[clamp(28px,4vw,48px)]">
         {/* left: name + meta */}
-        <div className="flex flex-col justify-between pb-12">
+        <div className="flex flex-1 basis-[440px] flex-col justify-between pb-[clamp(24px,4vw,48px)]">
           <motion.div {...fadeUp(0.24)}>
-            <div className="flex items-center gap-7">
+            <div className="flex flex-wrap items-center gap-[clamp(16px,3vw,28px)]">
               <div>
-                <div className="font-display text-[72px] leading-none text-paper uppercase">
-                  Wilken
+                <div className="font-display text-[clamp(48px,8vw,72px)] leading-none text-paper uppercase">
+                  {content.firstName}
                 </div>
-                <div className="font-display text-[72px] leading-none text-accent uppercase">
-                  Eupalao
+                <div className="font-display text-[clamp(48px,8vw,72px)] leading-none text-accent uppercase">
+                  {content.lastName}
                 </div>
               </div>
               <motion.div
-                className="relative h-[120px] w-[120px] shrink-0"
+                className="relative aspect-square w-[clamp(92px,14vw,120px)] shrink-0"
                 animate={{ rotate: 360 }}
-                transition={{
-                  duration: 14,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+                transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
               >
                 <svg viewBox="0 0 120 120" className="block h-full w-full">
                   <defs>
@@ -114,22 +108,17 @@ export function Hero() {
                 </svg>
               </motion.div>
             </div>
-            <div className="mt-[22px] inline-flex items-center gap-3 bg-accent px-[18px] py-[10px] text-[14px] font-bold tracking-[0.18em] text-ink uppercase">
-              ↗ 3D Designer, Architectural Visualizer &amp; Web Developer
+            <div className="mt-[22px] inline-flex items-center gap-3 bg-accent px-[18px] py-[10px] text-[clamp(12px,1.6vw,14px)] font-bold tracking-[0.18em] text-ink uppercase">
+              ↗ {content.roleChip}
             </div>
           </motion.div>
 
           <motion.div
-            className="mt-11 grid grid-cols-2 gap-0 border-t-2 border-line"
+            className="mt-11 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 border-t-2 border-line"
             {...fadeUp(0.32)}
           >
-            <ul className="m-0 flex list-none flex-col gap-[14px] border-r-2 border-line py-0 pt-7 pr-6 pl-0">
-              {[
-                "3D Visualization",
-                "Architectural Renders",
-                "Web Development",
-                "UI/UX Design",
-              ].map((item) => (
+            <ul className="m-0 flex list-none flex-col gap-[14px] p-0 pt-7">
+              {content.services.map((item) => (
                 <li
                   key={item}
                   className="flex gap-3 text-[14px] font-medium tracking-[0.2em] uppercase"
@@ -138,15 +127,13 @@ export function Hero() {
                 </li>
               ))}
             </ul>
-            <div className="flex flex-col gap-5 py-0 pt-7 pr-0 pl-8">
+            <div className="flex flex-col gap-5 pt-7">
               <div className="flex items-center gap-[14px]">
                 <div className="h-[10px] w-[10px] bg-accent" />
                 <div className="text-[13px] tracking-[0.2em] text-gray2 uppercase">
                   Based in
                   <br />
-                  <span className="font-semibold text-paper">
-                    the Philippines
-                  </span>
+                  <span className="font-semibold text-paper">{content.basedIn}</span>
                 </div>
               </div>
               <div className="flex items-center gap-[14px]">
@@ -154,30 +141,43 @@ export function Hero() {
                 <div className="text-[13px] tracking-[0.2em] text-gray2 uppercase">
                   Available for
                   <br />
-                  <span className="font-semibold text-paper">Freelance</span>
+                  <span className="font-semibold text-paper">
+                    {content.availability}
+                  </span>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* right: portrait on rust block */}
-        <motion.div className="relative" {...fadeUp(0.28)}>
+        {/* right: animated portrait on rust block */}
+        <motion.div
+          className="relative max-w-[520px] flex-1 basis-[320px]"
+          {...fadeUp(0.28)}
+        >
           <div
-            className="absolute top-9 -right-12 bottom-0 left-[60px] bg-accent"
-            style={{
-              clipPath: "polygon(22% 0,100% 0,100% 100%,0 100%,0 38%)",
-            }}
+            className="absolute top-9 -right-6 bottom-0 left-12 bg-accent"
+            style={{ clipPath: "polygon(22% 0,100% 0,100% 100%,0 100%,0 38%)" }}
           />
-          <Image
-            src="/images/portrait.jpeg"
-            alt="Wilken Eupalao portrait"
-            width={520}
-            height={640}
-            className="relative block w-full grayscale mix-blend-multiply contrast-[1.06]"
-          />
-          <div className="absolute right-[-24px] bottom-[110px] -rotate-90 origin-[right_bottom] font-display text-[22px] tracking-[0.08em] text-ink uppercase">
-            Wilken ✕
+          <div className="portrait-float relative">
+            <Image
+              src="/images/portrait.jpeg"
+              alt="Wilken Eupalao portrait"
+              width={520}
+              height={640}
+              className="block w-full grayscale mix-blend-multiply contrast-[1.06]"
+            />
+            <Image
+              src="/images/portrait.jpeg"
+              alt=""
+              aria-hidden
+              width={520}
+              height={640}
+              className="face-glitch absolute inset-0 block w-full mix-blend-multiply"
+            />
+          </div>
+          <div className="absolute right-[-14px] bottom-[110px] -rotate-90 origin-[right_bottom] font-display text-[22px] tracking-[0.08em] text-ink uppercase">
+            {content.firstName} ✕
           </div>
         </motion.div>
       </div>

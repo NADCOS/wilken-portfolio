@@ -1,15 +1,25 @@
 "use client";
 
 import { useRef } from "react";
+import type { WorkType } from "@/lib/supabase/types";
 
 export type DrawerForm = {
   title: string;
   category: string;
   client: string;
   description: string;
+  work_type: WorkType;
+  featured: boolean;
+  is_case_study: boolean;
   published: boolean;
   image_path: string;
 };
+
+const WORK_TYPES: { key: WorkType; label: string }[] = [
+  { key: "3d", label: "3D Render" },
+  { key: "web", label: "Website" },
+  { key: "brand", label: "Branding" },
+];
 
 type Props = {
   isNew: boolean;
@@ -22,6 +32,34 @@ type Props = {
   imagePreviewUrl: string | null;
   saving: boolean;
 };
+
+function ToggleRow({
+  label,
+  value,
+  onToggle,
+}: {
+  label: string;
+  value: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="flex items-center justify-between border-2 border-line p-[12px_14px]">
+      <span className="text-[11px] font-bold tracking-[0.24em] text-gray2 uppercase">
+        {label}
+      </span>
+      <button
+        onClick={onToggle}
+        className="relative h-[26px] w-[52px] cursor-pointer border-none p-0"
+        style={{ background: value ? "#C95B46" : "#3A3A3A" }}
+      >
+        <span
+          className="absolute top-[3px] h-5 w-5 bg-ink transition-[left] duration-150"
+          style={{ left: value ? "29px" : "3px" }}
+        />
+      </button>
+    </div>
+  );
+}
 
 export function EditDrawer({
   isNew,
@@ -41,7 +79,7 @@ export function EditDrawer({
   }
 
   return (
-    <div className="flex min-w-0 flex-col gap-[18px] border-l-2 border-line bg-surface p-[32px_28px]">
+    <div className="flex min-w-0 flex-col gap-[18px] overflow-y-auto border-l-2 border-line bg-surface p-[32px_28px]">
       <div className="flex items-center justify-between">
         <div className="font-display text-[24px] uppercase">
           {isNew ? "New Project" : "Edit Project"}
@@ -66,7 +104,7 @@ export function EditDrawer({
       />
       <div
         onClick={() => fileInputRef.current?.click()}
-        className="flex h-[150px] cursor-pointer flex-col items-center justify-center gap-2 border-2 border-dashed border-line-dashed bg-ink hover:border-accent"
+        className="flex h-[150px] shrink-0 cursor-pointer flex-col items-center justify-center gap-2 border-2 border-dashed border-line-dashed bg-ink hover:border-accent"
       >
         {imagePreviewUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -79,9 +117,7 @@ export function EditDrawer({
           <>
             <div className="font-display text-[20px] text-accent">↑</div>
             <div className="text-[12px] tracking-[0.22em] text-gray2 uppercase">
-              {uploading
-                ? "Uploading…"
-                : "Upload image · Supabase Storage"}
+              {uploading ? "Uploading…" : "Upload image · Supabase Storage"}
             </div>
           </>
         )}
@@ -97,6 +133,29 @@ export function EditDrawer({
           className="border-2 border-line bg-ink px-[14px] py-[11px] text-[15px] text-paper outline-none focus:border-accent"
         />
       </label>
+
+      <div className="flex flex-col gap-[6px]">
+        <span className="text-[11px] font-bold tracking-[0.24em] text-gray2 uppercase">
+          Work Type
+        </span>
+        <div className="flex gap-2">
+          {WORK_TYPES.map((t) => (
+            <button
+              key={t.key}
+              onClick={() => field("work_type")(t.key)}
+              className={
+                "flex-1 cursor-pointer border-2 px-2 py-[9px] text-[11px] font-bold tracking-[0.14em] uppercase " +
+                (form.work_type === t.key
+                  ? "border-accent bg-accent text-ink"
+                  : "border-line bg-transparent text-gray2 hover:border-accent hover:text-accent")
+              }
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <label className="flex flex-col gap-[6px]">
         <span className="text-[11px] font-bold tracking-[0.24em] text-gray2 uppercase">
           Category / Sub-label
@@ -129,21 +188,21 @@ export function EditDrawer({
         />
       </label>
 
-      <div className="flex items-center justify-between border-2 border-line p-[12px_14px]">
-        <span className="text-[11px] font-bold tracking-[0.24em] text-gray2 uppercase">
-          Published
-        </span>
-        <button
-          onClick={() => field("published")(!form.published)}
-          className="relative h-[26px] w-[52px] cursor-pointer border-none p-0"
-          style={{ background: form.published ? "#C95B46" : "#3A3A3A" }}
-        >
-          <span
-            className="absolute top-[3px] h-5 w-5 bg-ink transition-[left] duration-150"
-            style={{ left: form.published ? "29px" : "3px" }}
-          />
-        </button>
-      </div>
+      <ToggleRow
+        label="Featured on homepage"
+        value={form.featured}
+        onToggle={() => field("featured")(!form.featured)}
+      />
+      <ToggleRow
+        label="Case study (only one)"
+        value={form.is_case_study}
+        onToggle={() => field("is_case_study")(!form.is_case_study)}
+      />
+      <ToggleRow
+        label="Published"
+        value={form.published}
+        onToggle={() => field("published")(!form.published)}
+      />
 
       <button
         onClick={onSave}

@@ -5,23 +5,25 @@ import { SelectedWorks } from "@/components/portfolio/SelectedWorks";
 import { SkillsGrid } from "@/components/portfolio/SkillsGrid";
 import { CaseStudy } from "@/components/portfolio/CaseStudy";
 import { ContactFooter } from "@/components/portfolio/ContactFooter";
-import { getPublishedProjects, getCaseStudyProject } from "@/lib/projects";
+import { getFeaturedProjects, getCaseStudyProject } from "@/lib/projects";
+import { getSiteContent } from "@/lib/content";
 
 export default async function Home() {
-  const [projects, caseStudy] = await Promise.all([
-    getPublishedProjects(),
+  const [projects, caseStudy, content] = await Promise.all([
+    getFeaturedProjects(),
     getCaseStudyProject(),
+    getSiteContent(),
   ]);
 
   return (
-    <div className="mx-auto min-w-[1280px] max-w-[1680px] overflow-hidden bg-ink">
-      <Header />
-      <Hero />
-      <SkillsMarquee />
+    <div className="mx-auto w-full max-w-[1680px] overflow-hidden bg-ink">
+      <Header content={content.header} />
+      <Hero content={content.hero} />
+      <SkillsMarquee items={content.skills.marquee} />
       <SelectedWorks projects={projects} />
-      <SkillsGrid />
-      {caseStudy && <CaseStudy project={caseStudy} />}
-      <ContactFooter />
+      <SkillsGrid content={content.skills} />
+      {caseStudy && <CaseStudy project={caseStudy} content={content.caseStudy} />}
+      <ContactFooter content={content.contact} />
     </div>
   );
 }

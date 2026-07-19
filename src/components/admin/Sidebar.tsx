@@ -5,9 +5,20 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-const NAV_ITEMS = ["Case Study", "Media", "Profile"];
+export type AdminSection = "projects" | "content";
 
-export function Sidebar() {
+const NAV: { key: AdminSection; label: string }[] = [
+  { key: "projects", label: "Projects" },
+  { key: "content", label: "Site Content" },
+];
+
+export function Sidebar({
+  active,
+  onNavigate,
+}: {
+  active: AdminSection;
+  onNavigate: (section: AdminSection) => void;
+}) {
   const router = useRouter();
 
   async function handleLogout() {
@@ -30,16 +41,19 @@ export function Sidebar() {
         <div className="font-display text-[18px] uppercase">Wilken CMS</div>
       </div>
       <nav className="flex flex-col gap-[2px] py-4">
-        <div className="flex cursor-pointer items-center gap-3 bg-accent px-5 py-[13px] text-[13px] font-bold tracking-[0.22em] text-ink uppercase">
-          ▪ Projects
-        </div>
-        {NAV_ITEMS.map((item) => (
-          <div
-            key={item}
-            className="flex cursor-pointer items-center gap-3 px-5 py-[13px] text-[13px] font-semibold tracking-[0.22em] text-gray2 uppercase hover:bg-surface-2 hover:text-paper"
+        {NAV.map((item) => (
+          <button
+            key={item.key}
+            onClick={() => onNavigate(item.key)}
+            className={
+              "flex cursor-pointer items-center gap-3 border-none px-5 py-[13px] text-left font-sans text-[13px] tracking-[0.22em] uppercase " +
+              (active === item.key
+                ? "bg-accent font-bold text-ink"
+                : "bg-transparent font-semibold text-gray2 hover:bg-surface-2 hover:text-paper")
+            }
           >
-            ▪ {item}
-          </div>
+            ▪ {item.label}
+          </button>
         ))}
       </nav>
       <div className="mt-auto flex flex-col border-t-2 border-line">

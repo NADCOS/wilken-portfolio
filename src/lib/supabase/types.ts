@@ -1,3 +1,5 @@
+export type WorkType = "3d" | "web" | "brand";
+
 export type Project = {
   id: string;
   title: string;
@@ -6,6 +8,8 @@ export type Project = {
   description: string | null;
   image_path: string | null;
   tags: string[] | null;
+  work_type: WorkType;
+  featured: boolean;
   is_case_study: boolean;
   published: boolean;
   sort_order: number;
@@ -18,5 +22,8 @@ export type ProjectInput = {
   client: string;
   description: string;
   image_path: string;
+  work_type: WorkType;
+  featured: boolean;
+  is_case_study: boolean;
   published: boolean;
 };
