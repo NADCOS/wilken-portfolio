@@ -53,7 +53,7 @@ export function SelectedWorks({ projects }: { projects: WorkCard[] }) {
         </h2>
         <div className="flex flex-col items-end gap-[14px]">
           <div className="max-w-[260px] text-right text-[13px] tracking-[0.24em] text-gray2 uppercase">
-            3D renders, websites & brands — 2024–2026
+            3D renders, websites & brands — 2016–2026
           </div>
           <Link
             href="/works"
