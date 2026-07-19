@@ -21,6 +21,8 @@ export default async function WorksPage() {
       <Header content={content.header} variant="works" />
       <WorksIndex projects={projects} />
       <ContactFooter content={content.contact} />
+     <ContactFooter content={content.contact} />
+      <BackToTop />
     </div>
   );
 }

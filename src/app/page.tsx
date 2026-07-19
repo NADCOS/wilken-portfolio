@@ -24,7 +24,8 @@ export default async function Home() {
       <SelectedWorks projects={projects} />
       <SkillsGrid content={content.skills} />
       {caseStudy && <CaseStudy project={caseStudy} content={content.caseStudy} />}
-      <ContactFooter content={content.contact} />
+       <ContactFooter content={content.contact} />
+      <BackToTop />
     </div>
   );
 }
