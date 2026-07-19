@@ -1,5 +1,24 @@
 export type WorkType = "3d" | "web" | "brand";
 
+export const WORK_TYPE_LABELS: Record<WorkType, string> = {
+  "3d": "3D Render",
+  web: "Website",
+  brand: "Branding",
+};
+
+// Card shape used by the public pages (client-safe, no server imports).
+export type WorkCard = {
+  id: string;
+  title: string;
+  category: string | null;
+  image: string | null;
+  workType: WorkType;
+  featured: boolean;
+  isCaseStudy: boolean;
+  description: string | null;
+  client: string | null;
+};
+
 export type Project = {
   id: string;
   title: string;

@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { WorkCard } from "@/lib/projects";
+import type { WorkCard, WorkType } from "@/lib/supabase/types";
 import { WorkTile } from "@/components/portfolio/SelectedWorks";
-import type { WorkType } from "@/lib/supabase/types";
 
 const FILTERS: { key: WorkType | "all"; label: string }[] = [
   { key: "all", label: "All" },

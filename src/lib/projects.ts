@@ -1,24 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { projectImageUrl } from "@/lib/supabase/image";
-import type { Project, WorkType } from "@/lib/supabase/types";
+import type { Project, WorkType, WorkCard } from "@/lib/supabase/types";
 
-export const WORK_TYPE_LABELS: Record<WorkType, string> = {
-  "3d": "3D Render",
-  web: "Website",
-  brand: "Branding",
-};
-
-export type WorkCard = {
-  id: string;
-  title: string;
-  category: string | null;
-  image: string | null;
-  workType: WorkType;
-  featured: boolean;
-  isCaseStudy: boolean;
-  description: string | null;
-  client: string | null;
-};
+export type { WorkCard } from "@/lib/supabase/types";
 
 // Fallback seed used when Supabase env vars are missing, so the page still
 // renders during initial setup.

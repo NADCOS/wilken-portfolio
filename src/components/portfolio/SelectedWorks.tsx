@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { WorkCard } from "@/lib/projects";
-import { WORK_TYPE_LABELS } from "@/lib/projects";
+import type { WorkCard } from "@/lib/supabase/types";
+import { WORK_TYPE_LABELS } from "@/lib/supabase/types";
 
 export function WorkTile({ project }: { project: WorkCard }) {
   return (
