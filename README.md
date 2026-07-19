@@ -1,61 +1,61 @@
-# Wilken Eupalao — Portfolio + Admin CMS
+# Interactive upgrades — repo changes
 
-Next.js (App Router) + Tailwind CSS v4 + Framer Motion + Supabase implementation
-of the design handoff in `design_handoff_portfolio/` (`Portfolio.dc.html` +
-`Admin.dc.html`).
+New files (copy as-is into `src/components/portfolio/`):
+- `CompareSlider.tsx` — clay/final drag slider (client component)
+- `CursorZone.tsx` — "VIEW ↗" cursor follower wrapper (client component)
 
-## Stack
+Replaced file:
+- `SkillsMarquee.tsx` — now a client component: scroll speeds it up, hover pauses + inverts colors. Same `items` prop, no call-site changes.
 
-- **Next.js 16** (App Router, Turbopack)
-- **Tailwind CSS v4** (CSS-first theme in `src/app/globals.css`: `ink`, `accent`,
-  `paper`, `line`, `gray2`, `font-display` / `font-sans`)
-- **Framer Motion** — hero fade-up stagger, rotating circular badge
-- **Supabase** — Postgres (`projects` table), Auth (single admin user),
-  Storage (`project-images` bucket)
+## Edit `CaseStudy.tsx` (stays a server component)
 
-## Getting started
-
-```bash
-npm install
-cp .env.local.example .env.local   # fill in your Supabase project values
-npm run dev
+Add import:
+```tsx
+import { CompareSlider } from "./CompareSlider";
 ```
 
-Without Supabase env vars set, the public site still renders using the seed
-data baked into `src/lib/projects.ts` (matches the design mock), but `/admin`
-will not work — Supabase is required for auth and the CMS.
+Replace the image block:
+```tsx
+<div className="flex-1 basis-[320px] border-b-2 border-ink">
+  {project.image && (
+    <Image ... />
+  )}
+</div>
+```
+with:
+```tsx
+<div className="relative flex-1 basis-[320px] border-b-2 border-ink">
+  {project.image && (
+    <CompareSlider src={project.image} alt={project.title + " case study"} />
+  )}
+</div>
+```
+The `Image` import in CaseStudy.tsx becomes unused — remove it.
 
-## Supabase setup
+Note: the "clay" side is currently simulated (grayscale filter on the same render). When you have a real clay render, add a `claySrc` prop to CompareSlider and swap the second `<Image>` to it, dropping the filter class.
 
-1. Create a project at [supabase.com](https://supabase.com).
-2. Run `supabase/schema.sql` in the SQL editor. It creates the `projects`
-   table, RLS policies, the public `project-images` storage bucket, and seeds
-   the three mock projects (Vela Residence / Oro Pavilion / Kayu House).
-3. **Auth → Providers**: disable email signups (this app has exactly one
-   admin account, created manually).
-4. **Authentication → Users → Add user**: create the one admin account
-   (e.g. `eupalaow5@gmail.com`).
-5. Copy the seed render — `design_handoff_portfolio/assets/project_images-1784446622904.jpg`
-   (also mirrored at `public/images/vela-residence.jpg`) — into the
-   `project-images` bucket at path `seed/vela-residence.jpg` so it matches the
-   `image_path` the schema seeds for Vela Residence. Alternatively, re-upload
-   it from the admin dashboard's edit drawer once logged in.
-6. Copy `.env.local.example` to `.env.local` and fill in your project URL and
-   anon key (**Settings → API**).
+## Edit `SelectedWorks.tsx` (stays a server component)
 
-## Routes
+Add import:
+```tsx
+import { CursorZone } from "./CursorZone";
+```
 
-- `/` — public portfolio (`src/app/page.tsx`)
-- `/admin/login` — Supabase Auth email/password sign-in
-- `/admin` — protected dashboard (projects table + edit drawer), redirects to
-  `/admin/login` when signed out (enforced in `src/proxy.ts`)
+Replace the grid wrapper:
+```tsx
+<div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-6">
+  {projects.map(...)}
+</div>
+```
+with:
+```tsx
+<CursorZone className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-6">
+  {projects.map((project) => (
+    <WorkTile key={project.id} project={project} />
+  ))}
+</CursorZone>
+```
 
-## Notes
+Optionally reuse `CursorZone` around the grid in `WorksIndex.tsx` the same way.
 
-- The parent folder name must not contain `#` — Turbopack misreads it as a
-  URL fragment on Windows and the build silently truncates the path. That's
-  why this project lives at `WEB/wilken-portfolio` rather than nested inside
-  `WEB/# Wilken Portfolio Build/`.
-- Design tokens, copy, and spacing were transcribed directly from the two
-  `.dc.html` files for pixel fidelity — see `design_handoff_portfolio/README.md`
-  for the original handoff brief.
+No globals.css, schema, or config changes needed.
