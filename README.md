@@ -16,7 +16,12 @@ Interactive hero + frame scrub (new):
 - `Hero.tsx` — replaced; uses ReactiveName for the name block (nothing else changed)
 - `SelectedWorks.tsx` — replaced; WorkTile uses ScrubImage (keeps CursorZone wiring)
 
-Portrait + cursor + skills upgrades (new):
+Latest (PNG portrait + thicker cursor):
+- `public/images/portrait.png` — new transparent-background portrait; delete `public/images/portrait.jpeg`
+- `Hero.tsx` — now points at /images/portrait.png
+- `CustomCursor.tsx` — thicker ✳ (2px stroke, 20px base)
+
+Portrait + cursor + skills upgrades:
 - `public/images/portrait.jpeg` — replaced; background tone-mapped to exact #151515 (your rust outline preserved)
 - `Hero.tsx` — replaced; drops the grayscale/blend/glitch layers that were killing the outline color
 - `CustomCursor.tsx` — new; site-wide ✳ cursor, grows over links/buttons (desktop only, native cursor on touch)

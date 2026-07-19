@@ -37,11 +37,11 @@ export function CustomCursor() {
       <div
         className="flex items-center justify-center font-display text-accent transition-[width,height,font-size,background] duration-150"
         style={{
-          width: big ? 44 : 14,
-          height: big ? 44 : 14,
-          fontSize: big ? 30 : 14,
+          width: big ? 48 : 20,
+          height: big ? 48 : 20,
+          fontSize: big ? 34 : 20,
           lineHeight: 1,
-          background: big ? "transparent" : "transparent",
+          WebkitTextStroke: "2px #C95B46",
         }}
       >
         ✳︎

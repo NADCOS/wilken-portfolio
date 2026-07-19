@@ -158,7 +158,7 @@ export function Hero({ content }: { content: SiteContent["hero"] }) {
           />
           <div className="portrait-float relative">
             <Image
-              src="/images/portrait.jpeg"
+              src="/images/portrait.png"
               alt="Wilken Eupalao portrait"
               width={520}
               height={640}
