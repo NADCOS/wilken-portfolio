@@ -3,7 +3,15 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export function CompareSlider({ src, alt }: { src: string; alt: string }) {
+export function CompareSlider({
+  src,
+  claySrc,
+  alt,
+}: {
+  src: string;
+  claySrc?: string | null;
+  alt: string;
+}) {
   const [pos, setPos] = useState(55);
 
   const drag = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -22,11 +30,14 @@ export function CompareSlider({ src, alt }: { src: string; alt: string }) {
       <Image src={src} alt={alt} fill className="object-cover" draggable={false} />
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <Image
-          src={src}
+          src={claySrc ?? src}
           alt=""
           aria-hidden
           fill
-          className="object-cover [filter:grayscale(1)_contrast(0.85)_brightness(1.25)]"
+          className={
+            "object-cover" +
+            (claySrc ? "" : " [filter:grayscale(1)_contrast(0.85)_brightness(1.25)]")
+          }
           draggable={false}
         />
       </div>

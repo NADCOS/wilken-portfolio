@@ -13,6 +13,7 @@ export type DrawerForm = {
   is_case_study: boolean;
   published: boolean;
   image_path: string;
+  clay_image_path: string;
 };
 
 const WORK_TYPES: { key: WorkType; label: string }[] = [
@@ -28,8 +29,11 @@ type Props = {
   onClose: () => void;
   onSave: () => void;
   onUploadFile: (file: File) => void;
+  onUploadClayFile: (file: File) => void;
   uploading: boolean;
+  uploadingClay: boolean;
   imagePreviewUrl: string | null;
+  clayPreviewUrl: string | null;
   saving: boolean;
 };
 
@@ -68,11 +72,15 @@ export function EditDrawer({
   onClose,
   onSave,
   onUploadFile,
+  onUploadClayFile,
   uploading,
+  uploadingClay,
   imagePreviewUrl,
+  clayPreviewUrl,
   saving,
 }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const clayInputRef = useRef<HTMLInputElement>(null);
 
   function field<K extends keyof DrawerForm>(key: K) {
     return (value: DrawerForm[K]) => onChange({ ...form, [key]: value });
@@ -120,6 +128,50 @@ export function EditDrawer({
               {uploading ? "Uploading…" : "Upload image · Supabase Storage"}
             </div>
           </>
+        )}
+      </div>
+
+      <input
+        ref={clayInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) onUploadClayFile(file);
+        }}
+      />
+      <div className="flex flex-col gap-[6px]">
+        <span className="text-[11px] font-bold tracking-[0.24em] text-gray2 uppercase">
+          Clay render · case-study slider (optional)
+        </span>
+        <div
+          onClick={() => clayInputRef.current?.click()}
+          className="flex h-[100px] shrink-0 cursor-pointer flex-col items-center justify-center gap-2 border-2 border-dashed border-line-dashed bg-ink hover:border-accent"
+        >
+          {clayPreviewUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={clayPreviewUrl}
+              alt="Clay render preview"
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <>
+              <div className="font-display text-[20px] text-accent">↑</div>
+              <div className="text-[12px] tracking-[0.22em] text-gray2 uppercase">
+                {uploadingClay ? "Uploading…" : "Upload clay render"}
+              </div>
+            </>
+          )}
+        </div>
+        {form.clay_image_path && (
+          <button
+            onClick={() => field("clay_image_path")("")}
+            className="cursor-pointer self-start border-none bg-transparent p-0 text-[11px] tracking-[0.2em] text-gray2 uppercase hover:text-accent"
+          >
+            ✕ Remove clay render
+          </button>
         )}
       </div>
 

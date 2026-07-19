@@ -12,6 +12,7 @@ export type WorkCard = {
   title: string;
   category: string | null;
   image: string | null;
+  clayImage: string | null;
   workType: WorkType;
   featured: boolean;
   isCaseStudy: boolean;

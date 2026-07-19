@@ -26,7 +26,11 @@ export function CaseStudy({
       <div className="flex flex-wrap">
         <div className="relative flex-1 basis-[320px] border-b-2 border-ink">
           {project.image && (
-            <CompareSlider src={project.image} alt={project.title + " case study"} />
+            <CompareSlider
+              src={project.image}
+              claySrc={project.clayImage}
+              alt={project.title + " case study"}
+            />
           )}
         </div>
         <div className="flex grow-[2] basis-[420px] flex-col gap-8 border-b-2 border-ink px-[clamp(20px,4vw,40px)] py-[clamp(28px,4vw,44px)]">

@@ -20,6 +20,7 @@ const EMPTY_FORM: DrawerForm = {
   is_case_study: false,
   published: false,
   image_path: "",
+  clay_image_path: "",
 };
 
 export function Dashboard({
@@ -34,6 +35,7 @@ export function Dashboard({
   const [editing, setEditing] = useState<Project | "new" | null>(null);
   const [form, setForm] = useState<DrawerForm>(EMPTY_FORM);
   const [uploading, setUploading] = useState(false);
+  const [uploadingClay, setUploadingClay] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const isNew = editing === "new";
@@ -55,6 +57,8 @@ export function Dashboard({
       is_case_study: project.is_case_study ?? false,
       published: project.published,
       image_path: project.image_path ?? "",
+      clay_image_path:
+        project.tags?.find((t) => t.startsWith("clay:"))?.slice(5) ?? "",
     });
     setEditing(project);
   }
@@ -63,20 +67,24 @@ export function Dashboard({
     setEditing(null);
   }
 
-  async function uploadFile(file: File) {
-    setUploading(true);
+  async function uploadTo(
+    key: "image_path" | "clay_image_path",
+    file: File,
+    setBusy: (b: boolean) => void,
+  ) {
+    setBusy(true);
     const supabase = createClient();
     const path = crypto.randomUUID() + "-" + file.name;
     const { error } = await supabase.storage
       .from("project-images")
       .upload(path, file, { upsert: true });
-    setUploading(false);
+    setBusy(false);
 
     if (error) {
       alert("Upload failed: " + error.message);
       return;
     }
-    setForm((f) => ({ ...f, image_path: path }));
+    setForm((f) => ({ ...f, [key]: path }));
   }
 
   async function save() {
@@ -93,6 +101,7 @@ export function Dashboard({
       is_case_study: form.is_case_study,
       published: form.published,
       image_path: form.image_path || null,
+      tags: form.clay_image_path ? ["clay:" + form.clay_image_path] : null,
     };
 
     if (isNew) {
@@ -188,11 +197,18 @@ export function Dashboard({
               onChange={setForm}
               onClose={closeDrawer}
               onSave={save}
-              onUploadFile={uploadFile}
+              onUploadFile={(file) => uploadTo("image_path", file, setUploading)}
+              onUploadClayFile={(file) =>
+                uploadTo("clay_image_path", file, setUploadingClay)
+              }
               uploading={uploading}
+              uploadingClay={uploadingClay}
               saving={saving}
               imagePreviewUrl={
                 form.image_path ? projectImageUrl(form.image_path) : null
+              }
+              clayPreviewUrl={
+                form.clay_image_path ? projectImageUrl(form.clay_image_path) : null
               }
             />
           )}

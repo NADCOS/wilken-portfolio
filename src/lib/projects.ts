@@ -12,6 +12,7 @@ const FALLBACK_PROJECTS: WorkCard[] = [
     title: "Vela Residence",
     category: "Interior Render · Corona",
     image: "/images/vela-residence.jpg",
+    clayImage: null,
     workType: "3d",
     featured: true,
     isCaseStudy: true,
@@ -23,6 +24,7 @@ const FALLBACK_PROJECTS: WorkCard[] = [
     title: "Oro Pavilion",
     category: "Commercial Render · V-Ray",
     image: null,
+    clayImage: null,
     workType: "3d",
     featured: false,
     isCaseStudy: false,
@@ -34,6 +36,7 @@ const FALLBACK_PROJECTS: WorkCard[] = [
     title: "Kayu House",
     category: "Exterior Render · 3ds Max",
     image: null,
+    clayImage: null,
     workType: "3d",
     featured: false,
     isCaseStudy: false,
@@ -43,11 +46,14 @@ const FALLBACK_PROJECTS: WorkCard[] = [
 ];
 
 function mapRow(row: Project): WorkCard {
+  const clayPath =
+    row.tags?.find((t) => t.startsWith("clay:"))?.slice(5) ?? null;
   return {
     id: row.id,
     title: row.title,
     category: row.category,
     image: projectImageUrl(row.image_path),
+    clayImage: projectImageUrl(clayPath),
     workType: (row.work_type as WorkType) || "3d",
     featured: row.featured ?? false,
     isCaseStudy: row.is_case_study,
