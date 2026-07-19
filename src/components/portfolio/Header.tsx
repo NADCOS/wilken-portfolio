@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { SiteContent } from "@/lib/content";
 
@@ -17,12 +16,13 @@ export function Header({
   return (
     <header className="sticky top-0 z-40 flex flex-wrap items-stretch border-b-2 border-line bg-ink">
       <div className="flex flex-1 basis-[320px] flex-wrap items-center gap-[14px] px-[clamp(20px,4vw,48px)] py-4">
-        <Image
-          src="/images/wilken-logo.jpg"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/logo.svg"
           alt="Wilken logo"
           width={44}
           height={44}
-          className="block h-11 w-11 object-cover"
+          className="block h-11 w-11"
         />
         <div className="text-[14px] font-semibold tracking-[0.28em] uppercase">
           {content.name}

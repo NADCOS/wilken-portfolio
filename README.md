@@ -16,7 +16,14 @@ Interactive hero + frame scrub (new):
 - `Hero.tsx` — replaced; uses ReactiveName for the name block (nothing else changed)
 - `SelectedWorks.tsx` — replaced; WorkTile uses ScrubImage (keeps CursorZone wiring)
 
-Latest (PNG portrait + thicker cursor):
+Latest (logo SVG + contact upgrades):
+- `public/images/logo.svg` — new; your logo paths recolored to #C95B46 on transparent (the uploaded SVG had its colors stripped)
+- `public/wilken.vcf` — new; downloadable contact card
+- `Header.tsx` + `admin/Sidebar.tsx` — replaced; use logo.svg (plain <img>, next/image blocks SVG). Delete public/images/wilken-logo.jpg after.
+- `ContactFooter.tsx` — replaced; adds WhatsApp row (assumes +63 — edit the "63" prefix in waHref if wrong) and "Save contact card" row; the three shapes + ✳ now animate (bounce / flip / stepped spin)
+- `src/app/globals.css` — replaced again; shape keyframes added
+
+Previous (PNG portrait + thicker cursor):
 - `public/images/portrait.png` — new transparent-background portrait; delete `public/images/portrait.jpeg`
 - `Hero.tsx` — now points at /images/portrait.png
 - `CustomCursor.tsx` — thicker ✳ (2px stroke, 20px base)

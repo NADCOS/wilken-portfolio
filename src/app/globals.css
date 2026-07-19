@@ -37,6 +37,24 @@
 }
 
 .portrait-float { animation: portrait-float 7s ease-in-out infinite; }
+
+@keyframes shape-bounce {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-18px); }
+  60% { transform: translateY(0); }
+  70% { transform: translateY(-6px); }
+  80% { transform: translateY(0); }
+}
+@keyframes shape-rock {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+}
+@keyframes shape-spin-steps {
+  to { transform: rotate(360deg); }
+}
+.shape-bounce { animation: shape-bounce 2.8s ease-in-out infinite; }
+.shape-rock { transform-origin: 50% 100%; animation: shape-rock 3.6s cubic-bezier(0.7,0,0.3,1) infinite; }
+.shape-spin { animation: shape-spin-steps 4s steps(4, end) infinite; }
 .face-glitch {
   animation: face-glitch 6s steps(1) infinite;
   filter: grayscale(1) contrast(1.25) sepia(1) hue-rotate(-28deg) saturate(4);

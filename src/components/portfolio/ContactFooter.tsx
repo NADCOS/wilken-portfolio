@@ -3,6 +3,16 @@ import type { SiteContent } from "@/lib/content";
 
 export function ContactFooter({ content }: { content: SiteContent["contact"] }) {
   const telHref = "tel:" + content.phone.replace(/\s+/g, "");
+  // WhatsApp needs the full international number. Assumes Philippines (+63);
+  // change the "63" prefix if the number is from another country.
+  const waHref =
+    "https://wa.me/" + "63" + content.phone.replace(/\D/g, "").replace(/^0/, "");
+  const ROW =
+    "flex items-center gap-[18px] border-2 border-line px-[22px] py-4 hover:border-accent hover:text-paper";
+  const LABEL =
+    "w-16 shrink-0 text-[11px] font-bold tracking-[0.26em] text-accent uppercase";
+  const VALUE = "text-[16px] font-medium tracking-[0.06em] [overflow-wrap:anywhere]";
+
   return (
     <>
       <section
@@ -21,47 +31,37 @@ export function ContactFooter({ content }: { content: SiteContent["contact"] }) 
             <div className="font-display text-[44px] text-ink">↗︎</div>
           </div>
           <div className="flex items-end gap-4">
-            <div className="h-[72px] w-[72px] rounded-full bg-ink" />
-            <div className="h-9 w-[72px] rounded-t-[36px] bg-ink opacity-55" />
-            <div className="h-9 w-9 bg-ink" />
-            <div className="ml-auto font-display text-[32px] text-ink">✳︎</div>
+            <div className="shape-bounce h-[72px] w-[72px] rounded-full bg-ink" />
+            <div className="shape-rock h-9 w-[72px] rounded-t-[36px] bg-ink opacity-55" />
+            <div className="shape-spin h-9 w-9 bg-ink" />
+            <div className="ml-auto animate-[spin_6s_steps(8)_infinite] font-display text-[32px] text-ink">✳︎</div>
           </div>
         </div>
         <div className="flex flex-col justify-center gap-[22px] px-[clamp(20px,4vw,48px)] py-[clamp(32px,5vw,56px)]">
-          <a
-            href={"mailto:" + content.email}
-            className="flex items-center gap-[18px] border-2 border-line px-[22px] py-4 hover:border-accent hover:text-paper"
-          >
-            <span className="w-16 shrink-0 text-[11px] font-bold tracking-[0.26em] text-accent uppercase">
-              Email
-            </span>
-            <span className="text-[16px] font-medium tracking-[0.06em] [overflow-wrap:anywhere]">
-              {content.email}
-            </span>
+          <a href={"mailto:" + content.email} className={ROW}>
+            <span className={LABEL}>Email</span>
+            <span className={VALUE}>{content.email}</span>
           </a>
-          <a
-            href={telHref}
-            className="flex items-center gap-[18px] border-2 border-line px-[22px] py-4 hover:border-accent hover:text-paper"
-          >
-            <span className="w-16 shrink-0 text-[11px] font-bold tracking-[0.26em] text-accent uppercase">
-              Phone
-            </span>
-            <span className="text-[16px] font-medium tracking-[0.06em]">
-              {content.phone}
-            </span>
+          <a href={telHref} className={ROW}>
+            <span className={LABEL}>Phone</span>
+            <span className={VALUE}>{content.phone}</span>
+          </a>
+          <a href={waHref} target="_blank" rel="noopener noreferrer" className={ROW}>
+            <span className={LABEL}>WhatsApp</span>
+            <span className={VALUE}>Chat on WhatsApp ↗︎</span>
           </a>
           <a
             href={content.socialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-[18px] border-2 border-line px-[22px] py-4 hover:border-accent hover:text-paper"
+            className={ROW}
           >
-            <span className="w-16 shrink-0 text-[11px] font-bold tracking-[0.26em] text-accent uppercase">
-              Socials
-            </span>
-            <span className="text-[16px] font-medium tracking-[0.06em] [overflow-wrap:anywhere]">
-              {content.socialLabel}
-            </span>
+            <span className={LABEL}>Socials</span>
+            <span className={VALUE}>{content.socialLabel}</span>
+          </a>
+          <a href="/wilken.vcf" download className={ROW}>
+            <span className={LABEL}>Contact</span>
+            <span className={VALUE}>Save contact card ↓</span>
           </a>
           <div className="flex items-center gap-[18px] px-[22px]">
             <span className="h-[10px] w-[10px] rounded-full bg-accent" />

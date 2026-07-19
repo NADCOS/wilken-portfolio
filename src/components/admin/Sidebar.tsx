@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -31,12 +30,13 @@ export function Sidebar({
   return (
     <aside className="flex flex-col border-r-2 border-line">
       <div className="flex items-center gap-3 border-b-2 border-line p-5">
-        <Image
-          src="/images/wilken-logo.jpg"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/logo.svg"
           alt="Wilken logo"
           width={36}
           height={36}
-          className="block h-9 w-9 object-cover"
+          className="block h-9 w-9"
         />
         <div className="font-display text-[18px] uppercase">Wilken CMS</div>
       </div>
