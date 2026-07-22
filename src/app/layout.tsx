@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Anton, Oswald } from "next/font/google";
 import "./globals.css";
 import { LoadingScreen } from "@/components/portfolio/LoadingScreen";
+import { Analytics } from "@vercel/analytics/next";
 
 const anton = Anton({
   variable: "--font-anton",
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body>
         <LoadingScreen />
         {children}
+        <Analytics />
       </body>
     </html>
   );
